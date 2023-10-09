@@ -3,31 +3,90 @@
 class Conta
 {
     // atributos:
-    public string $cpfTitular;
-    public string $nomeTitular;
-    public float $saldo;
+    private string $cpfTitular;
+    private string $nomeTitular;
+    private float $saldo = 0;
+  
+
+    public function sacar(float $valorASacar): void
+    {
+        if ($valorASacar > $this->saldo){
+            echo "Saldo indisponível";
+            return;
+        }
+
+        $this->saldo -= $valorASacar;
+        
+    }
+
+    public function depositar(float $ValorADepositar): void
+    {
+        if ($ValorADepositar < 0){
+            echo "Valor precisa ser positivo";
+            return;
+        }
+
+        $this->saldo += $ValorADepositar;
+    }
+
+    public function transferir(float $valorATransferir, Conta $contaDestino): void
+    {
+        if ($valorATransferir > $this->saldo){
+            echo "Saldo indisponível";
+            return;
+        } 
+
+        $this->sacar($valorATransferir);
+        $contaDestino->depositar($valorATransferir);
+
+    }
+
+
+
+
+    /**
+     * Get the value of cpfTitular
+     */
+    public function getCpfTitular(): string
+    {
+        return $this->cpfTitular;
+    }
+
+    /**
+     * Set the value of cpfTitular
+     */
+    public function setCpfTitular(string $cpfTitular): self
+    {
+        $this->cpfTitular = $cpfTitular;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nomeTitular
+     */
+    public function getNomeTitular(): string
+    {
+        return $this->nomeTitular;
+    }
+
+    /**
+     * Set the value of nomeTitular
+     */
+    public function setNomeTitular(string $nomeTitular): self
+    {
+        $this->nomeTitular = $nomeTitular;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of saldo
+     */
+    public function getSaldo(): float
+    {
+        return $this->saldo;
+    }
+
 }
 
-$primeiraConta = new Conta();
-//var_dump($primeiraConta);
-
-$primeiraConta = new Conta();
-$primeiraConta->saldo = 200;
-//var_dump($primeiraConta);
-
-$primeiraConta->cpfTitular = '123.456.789.10';
-//var_dump($primeiraConta);
-
-$primeiraConta->nomeTitular = 'Sergio';
-//var_dump($primeiraConta);
-
-$segundaConta = new Conta();
-$segundaConta->cpfTitular = '999.888.777-10';
-$segundaConta->nomeTitular = 'João';
-$segundaConta->saldo = 1000;
-var_dump($segundaConta);
-
-// a variável $c aponta para o mesmo endereço que a variável $segundaConta,
-// então são referências a um mesmo objeto
-$c = $segundaConta;
-var_dump($c);
