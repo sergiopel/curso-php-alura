@@ -3,8 +3,9 @@
 class Conta
 {
     // atributos:
-    private string $cpfTitular;
-    private string $nomeTitular;
+    //private string $cpfTitular;
+    //private string $nomeTitular;
+    private $titular;
     private float $saldo;
     // O static diz que é um atributo da própria classe (não é da instância),
     // que para acessá-lo não será preciso usar o 'this', não precisa instanciar um objeto,
@@ -19,15 +20,17 @@ class Conta
     // atributos no momento da criação do objeto.
     // Então neste momento eu não preciso mais dos métodos setters que
     // definem o titular e o cpf do titular
-    public function __construct(string $cpfTitular, string $nomeTitular)
+    //public function __construct(string $cpfTitular, string $nomeTitular)
+    public function __construct(Titular $titular)
     {
         # saldo da instância = 0
         $this->saldo = 0;
+        $this->titular = $titular;
         # cpf do titular da instância = cpf do titular recebido por parâmetro
-        $this->cpfTitular = $cpfTitular;
-        $this->validaNomeTitular($nomeTitular);
+        //$this->cpfTitular = $cpfTitular;
+        //$this->validaNomeTitular($nomeTitular);
         # nome do titular da instância = nome do titular recebido por parâmetro
-        $this->nomeTitular = $nomeTitular;
+        //$this->nomeTitular = $nomeTitular;
 
         // Para tantas quantas contas forem criadas, irá somar nessa variável (da classe) a soma
         // de todas as contas criadas.
@@ -76,57 +79,11 @@ class Conta
     }
 
     /**
-     * Get the value of cpfTitular
-     */
-    public function getCpfTitular(): string
-    {
-        return $this->cpfTitular;
-    }
-
-    /**
-     * Set the value of cpfTitular
-     */
-    /*
-     public function setCpfTitular(string $cpfTitular): void
-    {
-        $this->cpfTitular = $cpfTitular;
-    }
-    */ 
-    
-    /**
-     * Get the value of nomeTitular
-     */
-    public function getNomeTitular(): string
-    {
-        return $this->nomeTitular;
-    }
-
-    /**
-     * Set the value of nomeTitular
-     */
-    /*
-     public function setNomeTitular(string $nomeTitular): void
-    {
-        $this->nomeTitular = $nomeTitular;
-    }
-    */
-
-    /**
      * Get the value of saldo
      */
     public function getSaldo(): float
     {
         return $this->saldo;
-    }
-
-    // método privado porque ele não pode ser chamado individualmente de fora da classe,
-    // faz parte apenas da lógica da validação do nome do titular do construct.
-    private function validaNomeTitular(string $nomeTitular)
-    {
-        if (strlen($nomeTitular) < 5){
-            echo "Nome precisa ter pelo menos 5 caracteres";
-            exit();
-        }
     }
 
     public static function recuperaNumeroDeContas(): int
@@ -135,6 +92,17 @@ class Conta
         // eu posso substituir também o nome da classe 'Conta' pelo 'self':
         return self::$numeroDeContas;
     }
+
+    public function getCpfTitular(): string
+    {
+        return $this->titular->getCpf();
+    }
+
+    public function getNomeTitular(): string
+    {
+        return $this->titular->getNome();
+    }
+
 
 }
 
