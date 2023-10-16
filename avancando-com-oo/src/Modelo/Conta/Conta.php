@@ -1,12 +1,14 @@
 <?php
 
-class Conta
+namespace Alura\Banco\Modelo\Conta;
+
+abstract class Conta
 {
     // atributos:
     //private string $cpfTitular;
     //private string $nomeTitular;
-    private $titular;
-    private float $saldo;
+    private Titular $titular;
+    protected float $saldo;
     // O static diz que é um atributo da própria classe (não é da instância),
     // que para acessá-lo não será preciso usar o 'this', não precisa instanciar um objeto,
     // mas precisa ser do tipo 'private', senão eu consigo atribuir qualquer valor de fora
@@ -47,12 +49,14 @@ class Conta
 
     public function sacar(float $valorASacar): void
     {
-        if ($valorASacar > $this->saldo){
+        $tarifaSaque = $valorASacar * $this->percentualTarifa();
+        $valorSaque = $valorASacar + $tarifaSaque;
+        if ($valorSaque > $this->saldo){
             echo "Saldo indisponível";
             return;
         }
 
-        $this->saldo -= $valorASacar;
+        $this->saldo -= $valorSaque;
         
     }
 
@@ -64,18 +68,6 @@ class Conta
         }
 
         $this->saldo += $ValorADepositar;
-    }
-
-    public function transferir(float $valorATransferir, Conta $contaDestino): void
-    {
-        if ($valorATransferir > $this->saldo){
-            echo "Saldo indisponível";
-            return;
-        } 
-
-        $this->sacar($valorATransferir);
-        $contaDestino->depositar($valorATransferir);
-
     }
 
     /**
@@ -103,6 +95,9 @@ class Conta
         return $this->titular->getNome();
     }
 
+    // se eu quero obrigar que todas as minhas classes extendidas implementem esse método,
+    // aqui precisa ser abstrato e, por consequencia, a classe deverá ser abstrata
+    abstract protected function percentualTarifa(): float;
 
 }
 

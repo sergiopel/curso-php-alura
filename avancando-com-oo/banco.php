@@ -1,9 +1,23 @@
 <?php
 
+// os require_once dos nossos arquivos (classes) agora estão sendo definidos automaticamente pelo autoload.php
+// então aqui eu preciso fazer o require_once somente do autoload.php
+require_once 'autoload.php';
+
+
+/*
 require_once 'src/Conta.php';
 require_once 'src/Titular.php';
 require_once 'src/Cpf.php';
 require_once 'src/Endereco.php';
+*/
+
+// para utilizar uma classe precisamos importá-la utilizando o use
+use Alura\Banco\Modelo\Endereco;
+use Alura\Banco\Modelo\Conta\Conta;
+use Alura\Banco\Modelo\Conta\Titular;
+use Alura\Banco\Modelo\Cpf;
+
 
 $endereco = new Endereco("SBCampo", "Centro", "Rua São Bernardo", "100");
 $contaUm = new Conta(new Titular(new Cpf('100.300.900-69'), 'João da Silva', $endereco));
