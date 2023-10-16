@@ -3,7 +3,7 @@
 // o namespace define a localização da classe, sendo que Alura\Banco é a raiz que eu defini
 namespace Alura\Banco\Modelo;
 
-class Pessoa 
+abstract class Pessoa 
 {
     protected string $nome;
     private CPF $cpf;
