@@ -2,8 +2,21 @@
 
 namespace Alura\Banco\Modelo;
 
-class Endereco
+/**
+ * Class Endereco
+ * @package Alura\Banco\Modelo
+ * @property-read string $cidade
+ * @property-read string $bairro
+ * @property-read string $rua
+ * @property-read string $numero
+ */
+//o 'final' impede a herança, ou seja, impede que outra class estenda  a classe Endereco
+ final class Endereco
 {
+ 
+    // insere código da trait, ou seja, copia o código de lá e cola aqui
+    use AcessoPropriedades;
+ 
     private string $cidade;
     private string $bairro;
     private string $rua;
@@ -41,4 +54,7 @@ class Endereco
     {
         return "{$this->rua}, {$this->numero}, {$this->bairro}, {$this->cidade}";
     }
+
+
+    
 }

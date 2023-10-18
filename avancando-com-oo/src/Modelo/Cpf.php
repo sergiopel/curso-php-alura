@@ -2,7 +2,8 @@
 
 namespace Alura\Banco\Modelo;
 
-class Cpf
+//o 'final' impede a herança, ou seja, impede que outra class estenda  a classe Cpf
+final class Cpf
 {
     private string $numero;
 
