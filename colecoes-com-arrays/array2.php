@@ -45,3 +45,9 @@ var_dump(in_array(7, $notas)); // retorna true
 echo "Alguém tirou 3?" . PHP_EOL;
 var_dump(in_array(3, $notas)); // retorna false
 
+// verificar se um determinado valor existe no array, para retornar a sua chave:
+echo "Quem tirou 7?" . PHP_EOL;
+echo array_search(7, $notas) . PHP_EOL;
+
+echo "Quem tirou 3?" . PHP_EOL;
+var_dump(array_search(3, $notas));
