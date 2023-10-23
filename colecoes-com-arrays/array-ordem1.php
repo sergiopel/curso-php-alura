@@ -19,3 +19,4 @@ var_dump($notasOrdenadas);
 
 // o exemplo abaixo dá erro, pois precisa ser passado por referência
 //sort([3, 5, 2]);
+
