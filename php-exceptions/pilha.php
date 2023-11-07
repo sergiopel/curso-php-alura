@@ -20,11 +20,14 @@ function funcao1()
     
     try {
         funcao2();
-    } catch (RuntimeException | DivisionByZeroError $problema) { //verifica se encontrou essa exceção na funcao2()
-      echo $problema->getMessage() . PHP_EOL;
-      echo $problema->getLine() . PHP_EOL; // mostra a linha que ocorreu o problema
+    //} catch (RuntimeException | DivisionByZeroError $problema) { //verifica se encontrou essa exceção na funcao2()
+    //} catch (Exception $excecao) { //verifica se encontrou essa exceção na funcao2()
+    // verifica se pegou qualquer coisa, exceção ou erro (Throwable é o mais genérico):
+    } catch (Throwable $problema) { //verifica se encontrou essa exceção na funcao2()    
+        echo $problema->getMessage() . PHP_EOL;
+        echo $problema->getLine() . PHP_EOL; // mostra a linha que ocorreu o problema
       // esse mostra a trilha de execução até chegar no erro:
-      echo $problema->getTraceAsString() . PHP_EOL;
+        echo $problema->getTraceAsString() . PHP_EOL;
       //echo "Na função 1, eu resolvi o problema da função 2" . PHP_EOL;
 //    } catch (DivisionByZeroError $erro) {
 //        echo "Erro ao dividir um número por 0" . PHP_EOL;
@@ -35,6 +38,10 @@ function funcao1()
         $problema
         );
         */
+/*
+    } catch (Error $erro) {
+        echo $erro->getMessage() . PHP_EOL;
+*/
     }
     
     echo 'Saindo da função 1' . PHP_EOL;
@@ -46,8 +53,9 @@ function funcao2()
 
     //$exception = new RuntimeException();
     // throw = lança exceção
-    throw new RuntimeException('Essa é a mensagem de exceção lançada');
-
+    //throw new RuntimeException('Essa é a mensagem de exceção lançada');
+    intdiv(1, 0);
+    throw new BadFunctionCallException('Essa é a mensagem de exceção lançada');
     // forçando erro de Divisão por zero
     // DivisionByZeroError
     //$divisão = intdiv(5, 0);

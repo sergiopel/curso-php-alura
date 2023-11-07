@@ -1,6 +1,8 @@
 <?php
 
 spl_autoload_register(function (string $nomeCompletoDaClasse) {
+    //echo $nomeCompletoDaClasse . PHP_EOL;
+    //exit();
     $caminhoArquivo = str_replace('Alura\\Banco', 'src', $nomeCompletoDaClasse);
     $caminhoArquivo = str_replace('\\', DIRECTORY_SEPARATOR, $caminhoArquivo);
     $caminhoArquivo .= '.php';
