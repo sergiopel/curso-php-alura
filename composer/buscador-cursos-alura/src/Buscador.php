@@ -1,4 +1,5 @@
 <?php
+
 // Fazendo mais organizado com classes
 namespace Alura\BuscadorDeCursos;
 
@@ -15,7 +16,7 @@ class Buscador
         $this->crawler = $crawler;
     }
 
-    public function buscar (string $url): array
+    public function buscar(string $url): array
     {
         $resposta = $this->httpClient->request('GET', $url);
         $html = $resposta->getBody();
@@ -25,7 +26,7 @@ class Buscador
 
         $cursos = [];
 
-        foreach ($elementosCursos as $elemento){
+        foreach ($elementosCursos as $elemento) {
             $cursos[] = $elemento->textContent;
         }
 
