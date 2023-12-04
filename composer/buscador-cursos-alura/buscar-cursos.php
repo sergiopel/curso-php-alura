@@ -1,5 +1,7 @@
 <?php
 
+// Após qualquer alteração no arquivo composer.json, é preciso executar
+// "composer dumpautoload"
 require 'vendor/autoload.php';
 
 // Para o método abaixo funcionar, é preciso criar o classmap no autoload do composer.json, para
