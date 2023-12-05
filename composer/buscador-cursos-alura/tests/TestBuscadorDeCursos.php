@@ -60,5 +60,8 @@ class TestBuscadorDeCursos extends TestCase
         $this->assertEquals('Curso Teste 1', $cursos[0]);
         $this->assertEquals('Curso Teste 2', $cursos[1]);
         $this->assertEquals('Curso Teste 3', $cursos[2]);
+
+        // essa instrução força a falha do teste
+        //$this->fail();
     }
 }
